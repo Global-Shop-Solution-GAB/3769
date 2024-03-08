@@ -1,0 +1,51 @@
+Program.Sub.ScreenSU.Start
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'Coded by: JLH
+'Project Start Date: 6/7/2011
+'Hooks:
+'  33601
+'Launches website from Script 1 button on main menu
+
+F.Intrinsic.Control.If(V.Caller.Hook,=,33623)
+	V.Passed.Menu-lblModule-5.Set("Yammer")
+F.Intrinsic.Control.Elseif(V.Caller.Hook,=,33624)
+	V.Passed.Admin-lblModule-5.Set("Yammer")
+F.Intrinsic.Control.Else
+	F.Intrinsic.Control.CallSub(Load)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.End
+
+
+Program.Sub.Main.End
+
+Program.Sub.Load.Start
+V.Local.sError.Declare(String)
+
+F.Intrinsic.Control.SetErrorHandler("Create_Error")
+
+F.Intrinsic.Task.ShellExec(V.Caller.Handle,"open","https://www.yammer.com/","","",1)
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Label("Create_Error")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Concat("Error Occured",V.Ambient.ErrorDescription,V.local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+F.Intrinsic.Control.EndIf
+
+
+
+Program.Sub.Load.End
+
+Program.Sub.Comments.Start
+${$0$}$ATG_3769_Launch_Website$}$JCT$}$4/11/2016
+${$1$}$$}$$}$0$}$33601$}$GSSMenu-Script1$}$4/11/2016 10:32:25 AM$}$(Program: GSSMenu.exe; Screen: )
+
+Program.Sub.Comments.End
+
